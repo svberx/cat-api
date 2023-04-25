@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+	<title>Cat Pictures</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	<style>
+        .button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			grid-gap: 10px;
+		}
+		.grid img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+        var emoji=document.getElementById("emoji")
+		$(document).ready(function() {
+			var apiKey = '';
+			var apiUrl = 'https://api.thecatapi.com/v1/images/search?limit=20';
+
+			$.ajax({
+				url: apiUrl,
+				headers: {
+					'x-api-key': apiKey
+				},
+				success: function(data) {
+					var grid = $('.grid');
+
+					$.each(data, function(index, cat) {
+						var img = $('<img>');
+						img.attr('src', cat.url);
+						grid.append(img);
+					});
+				}
+			});
+		});
+        function confirmRefresh() {
+		var confirmed = confirm("You wanna see another cute cats?😍");
+		if (confirmed) {
+            var confirmedAgain=confirm("You can't get enough of those cute cats😻")
+            if (confirmed){
+                var contifrmedLast=confirm("are you sure you want more❤️‍🔥")
+                if (confirmed){
+			location.reload();
+                }
+        }
+		}
+	}
+
+	</script>
+</head>
+<body>
+	<div class="grid"></div>
+    <div class="button-container">
+        <button class="btn btn-primary" onclick="confirmRefresh()">Refresh Page </button>
+    </div></body>
+</html>
